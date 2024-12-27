@@ -10,9 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@reduxjs/toolkit": "^2.5.0",
-    "@sentry/react": "^8.47.0",
-    "@sentry/tracing": "^7.114.0",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^22.10.2",
     "@uidotdev/usehooks": "^2.4.1",
@@ -21,11 +20,10 @@
     "axios": "^1.7.9",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
-    "konva": "^9.3.18",
+    "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-konva": "^19.0.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
     "react-virtualized": "^9.22.5",
