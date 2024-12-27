@@ -1,165 +1,101 @@
-<!-- # 项目部署指南
+# 项目环境配置指南
 
-## 环境准备
+## 环境文件说明
 
-1. **准备环境变量文件**：
-   - 确保在项目根目录下有适当的 `.env` 文件（如 `.env.development`, `.env.production` 等），这些文件将用于配置不同的环境变量。
+项目包含以下环境配置文件：
 
-## 打包步骤
+- `.env.development` - 开发环境配置
+- `.env.test` - 测试环境配置
+- `.env.staging` - 预发环境配置
+- `.env.production` - 生产环境配置
 
-1. **构建 Docker 镜像**：
+## 环境变量配置
 
-   ```bash
-   # 开发环境构建
-   docker build --build-arg NODE_ENV=development -t myapp:development .
+每个环境配置文件必须包含对应环境的 API 基础路径配置：
 
-   # 生产环境构建
-   docker build --build-arg NODE_ENV=production \
-                --build-arg VITE_APP_BASE_API=your_api_base \
-                --build-arg VITE_APP_ENV=production \
-                -t myapp:production .
-   ```
+```bash
+# 生产环境 (.env.production)
+VITE_APP_BASE_API_PRODUCTION=你的生产环境API地址
 
-2. **使用 Docker Compose 构建和运行**：
+# 预发环境 (.env.staging)
+VITE_APP_BASE_API_STAGING=你的预发环境API地址
 
-   ```bash
-   # 使用环境变量并启动服务
-   VITE_APP_BASE_API=your_api_base VITE_APP_ENV=production NODE_ENV=production docker-compose up -d
-   ```
+# 测试环境 (.env.test)
+VITE_APP_BASE_API_TEST=你的测试环境API地址
 
-## 启动步骤
-
-1. **启动服务**：
-
-   - 使用以下命令启动服务：
-
-   ```bash
-   NODE_ENV=production docker-compose up
-   ```
-
-   - 这将启动 `web` 和 `app` 两个服务。
-
-2. **后台运行**：
-
-   - 如果希望在后台运行服务，可以使用 `-d` 选项：
-
-   ```bash
-   NODE_ENV=production docker-compose up -d
-   ```
-
-3. **查看运行中的容器**：
-
-   - 使用以下命令查看正在运行的容器：
-
-   ```bash
-   docker ps
-   ```
-
-4. **停止服务**：
-
-   - 使用以下命令停止服务：
-
-   ```bash
-   docker-compose down
-   ```
-
-5. **日志查看**：
-   - 使用以下命令查看服务日志：
-   ```bash
-   docker-compose logs -f
-   ```
-
-## 注意事项
-
-- **端口冲突**：确保本地机器上没有其他服务占用 `80` 端口。
-- **环境变量**：根据需要调整 `.env` 文件中的变量，以适应不同的环境。
-- **Nginx 配置**：如果需要修改 Nginx 配置，请编辑 `default.conf` 文件，并确保在 `docker-compose.yml` 中正确挂载。
-
-通过以上步骤，你可以成功地打包和启动你的 Docker 项目。确保在每次修改配置后重新构建镜像以应用更改。 -->
-
-# 项目名称
-
-## 简介
-
-这是一个使用 React 和 Docker 构建的示例项目。项目旨在展示如何使用 Docker 和 Docker Compose 部署多环境的前端应用。
+# 开发环境 (.env.development)
+VITE_APP_BASE_API_DEVELOPMENT=你的开发环境API地址
+```
 
 ## 部署指南
 
-### 环境准备
+### 生产环境
 
-在开始之前，请确保你已经安装了以下工具：
-
-- [Docker](https://www.docker.com/get-started)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-
-### 环境配置
-
-项目支持多种环境配置，包括开发、测试、预发和生产环境。请根据需要选择合适的环境变量文件：
-
-- `.env.development`：开发环境
-- `.env.test`：测试环境
-- `.env.staging`：预发环境
-- `.env.production`：生产环境
-
-### 构建和运行
-
-#### 构建 Docker 镜像
-
-在项目根目录下，使用以下命令构建 Docker 镜像：
-
+```bash
+# 1. 确保 .env.production 文件存在并包含必要的环境变量
+# 2. 构建镜像
 docker build -t my-react-app --build-arg NODE_ENV=production .
 
-#### 启动容器
-
-根据不同的环境，使用以下命令启动容器：
-
-##### 开发环境
-
-docker-compose --env-file .env.development up
-
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.staging.yml --env-file .env.test up -d
-```
-
-访问地址：[http://localhost:8080](http://localhost:8080)
-
-##### 测试环境
-
-##### 预发环境
-
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.staging.yml --env-file .env.staging up -d
-```
-
-访问地址：[http://localhost:8081](http://localhost:8081)
-
-##### 生产环境
-
-```bash
+# 3. 启动服务（确保在项目根目录下执行）
 docker-compose -f docker-compose.yml -f docker-compose.production.yml --env-file .env.production up -d
 ```
 
-访问地址：[http://your-production-domain.com](http://your-production-domain.com)
+### 预发环境
 
-### 访问项目
+```bash
+# 1. 确保 .env.staging 文件存在并包含必要的环境变量
+# 2. 构建镜像
+docker build -t my-react-app --build-arg NODE_ENV=staging .
 
-根据你所选择的环境，使用相应的 URL 访问项目。确保在生产环境中使用正确的域名和 SSL 证书。
+# 3. 启动服务
+docker-compose -f docker-compose.yml -f docker-compose.staging.yml --env-file .env.staging up -d
+```
 
-### 注意事项
+### 测试环境
 
-- 确保在生产环境中配置了适当的安全措施，如防火墙和 SSL 证书。
-- 在更改环境变量或配置文件后，重新构建和启动容器以应用更改。
+```bash
+# 1. 确保 .env.test 文件存在并包含必要的环境变量
+# 2. 构建镜像
+docker build -t my-react-app --build-arg NODE_ENV=test .
 
-## 贡献
+# 3. 启动服务
+docker-compose -f docker-compose.yml -f docker-compose.test.yml --env-file .env.test up -d
+```
 
-欢迎对本项目的贡献！请遵循以下步骤：
+### 开发环境
 
-1. Fork 本仓库。
-2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)。
-3. 提交你的更改 (`git commit -m 'Add some AmazingFeature'`)。
-4. 推送到分支 (`git push origin feature/AmazingFeature`)。
-5. 打开一个 Pull Request。
+```bash
+# 1. 确保 .env.development 文件存在并包含必要的环境变量
+# 2. 启动服务
+docker-compose --env-file .env.development up
+```
 
-## 许可证
+## 常见问题解决
 
-本项目使用 MIT 许可证。详情请参阅 [LICENSE](LICENSE) 文件。
+### 环境变量未设置错误
+
+如果遇到类似以下错误：
+
+```bash
+WARN[0000] The "VITE_APP_BASE_API_STAGING" variable is not set. Defaulting to a blank string.
+services.env_file must be a mapping
+```
+
+解决步骤：
+
+1. 检查对应环境的 `.env` 文件是否存在
+2. 确保环境文件中包含所需的环境变量
+3. 确保环境变量名称正确（注意大小写）
+
+示例 `.env.production` 文件内容：
+
+```bash
+VITE_APP_BASE_API_PRODUCTION=https://api.production.example.com
+```
+
+## 注意事项
+
+1. 所有环境变量文件 (`.env.*`) 都应该添加到 `.gitignore` 中
+2. 在部署前，务必检查对应环境的环境变量是否配置完整
+3. 不同环境使用不同的 API 地址，确保配置正确的环境变量
+4. 环境变量的命名必须与代码中的引用保持一致

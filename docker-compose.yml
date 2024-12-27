@@ -3,9 +3,10 @@ services:
   app:
     build:
       context: .
-      args:
-        - NODE_ENV=${NODE_ENV}
-        - VITE_APP_BASE_API=${VITE_APP_BASE_API}
-        - VITE_APP_ENV=${VITE_APP_ENV}
-    volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - VITE_APP_BASE_API_PRODUCTION=${VITE_APP_BASE_API_PRODUCTION}
+      - VITE_APP_BASE_API_STAGING=${VITE_APP_BASE_API_STAGING}

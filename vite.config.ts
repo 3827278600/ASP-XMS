@@ -49,7 +49,7 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist',
       assetsDir: 'assets',
       sourcemap: true,
-      minify: 'terser',
+      // minify: 'terser',
       chunkSizeWarningLimit: 1024,
       terserOptions: {
         compress: {

@@ -15,7 +15,7 @@ COPY . .
 
 # 使用构建参数来设置环境变量
 ARG NODE_ENV=production
-ENV NODE_ENV=$NODE_ENV
+ENV NODE_ENV=${NODE_ENV}
 
 # 根据环境构建应用
 RUN npm run build:${NODE_ENV}
