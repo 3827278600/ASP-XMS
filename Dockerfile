@@ -18,13 +18,16 @@ ARG NODE_ENV=production
 ENV NODE_ENV=$NODE_ENV
 
 # 根据环境构建应用
-RUN if [ "$NODE_ENV" = "production" ]; then npm run build; else npm run build:dev; fi
+RUN npm run build:${NODE_ENV}
 
 # 使用 Nginx 镜像来服务构建的应用
 FROM nginx:latest
 
 # 复制构建输出到 Nginx 的 html 目录
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# 根据环境复制不同的 Nginx 配置文件
+COPY nginx/${NODE_ENV}.conf /etc/nginx/nginx.conf
 
 # 暴露端口
 EXPOSE 80
