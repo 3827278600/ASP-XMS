@@ -1,7 +1,18 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { registerMicroApps, start } from 'qiankun';
 import App from "./App";
 
+registerMicroApps([
+  {
+    name: 'sub-app', // 子应用名称
+    entry: '//localhost:7100', // 子应用入口
+    container: '#subapp-container', // 子应用挂载的 DOM 节点
+    activeRule: '/sub-app', // 子应用激活的路由规则
+  },
+]);
+
+start();
 // // 引入并配置埋点 SDK
 // import * as Sentry from '@sentry/react';
 // import { browserTracingIntegration } from "@sentry/react";

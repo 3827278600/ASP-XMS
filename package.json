@@ -12,6 +12,8 @@
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
     "@reduxjs/toolkit": "^2.5.0",
+    "@sentry/react": "^8.47.0",
+    "@sentry/tracing": "^7.114.0",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^22.10.2",
     "@uidotdev/usehooks": "^2.4.1",
@@ -22,6 +24,7 @@
     "dayjs": "^1.11.13",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
+    "qiankun": "^2.10.16",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.2.0",
