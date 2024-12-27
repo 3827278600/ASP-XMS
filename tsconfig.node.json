@@ -18,7 +18,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    
+
     /* 其他 */
     "skipLibCheck": true,
     "esModuleInterop": true,
