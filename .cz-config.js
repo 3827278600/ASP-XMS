@@ -1,0 +1,28 @@
+module.exports = {
+  types: [
+    { value: 'feat', name: 'feat:     新功能' },
+    { value: 'fix', name: 'fix:      修复bug' },
+    { value: 'docs', name: 'docs:     文档变更' },
+    { value: 'style', name: 'style:    代码格式（不影响功能，例如空格、分号等格式修正）' },
+    { value: 'refactor', name: 'refactor: 代码重构（不包括 bug 修复、功能新增）' },
+    { value: 'perf', name: 'perf:     性能优化' },
+    { value: 'test', name: 'test:     添加、修改测试用例' },
+    { value: 'chore', name: 'chore:    构建过程或辅助工具的变动' },
+    { value: 'revert', name: 'revert:   回滚' },
+    { value: 'merge', name: 'merge:    代码合并' },
+  ],
+  scopes: [],
+  messages: {
+    type: '选择你要提交的更改类型:',
+    scope: '选择一个 scope（可选）:',
+    customScope: '请输入自定义的 scope:',
+    subject: '简短描述（必填）:\n',
+    body: '详细描述，使用"|"换行（可选）:\n',
+    breaking: '非兼容性说明（可选）:\n',
+    footer: '关联关闭的 issue，例如：#31, #34（可选）:\n',
+    confirmCommit: '确认提交？',
+  },
+  allowCustomScopes: true,
+  allowBreakingChanges: ['feat', 'fix'],
+  subjectLimit: 100,
+};
