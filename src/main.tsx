@@ -26,11 +26,9 @@ start();
 //   tracesSampleRate: 1.0,
 // });
 
-const root = 
-
-createRoot(document.getElementById('root') as HTMLElement);
+const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

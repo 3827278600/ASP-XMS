@@ -54,6 +54,9 @@ export default [
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'react/jsx-uses-react': 'error',
       'react/jsx-uses-vars': 'error',
+      'react/jsx-no-undef': 'error',
+      'react/jsx-key': 'error',
+      'react/prop-types': 'error',
 
       // TypeScript 相关规则
       '@typescript-eslint/explicit-function-return-type': 'off',
@@ -63,25 +66,15 @@ export default [
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
+          varsIgnorePattern: '^React$',
           argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
           ignoreRestSiblings: true,
-          caughtErrorsIgnorePattern: '^_',
-          caughtErrors: 'all',
-          vars: 'all',
-          args: 'after-used',
-          caughtErrors: 'all',
-          caughtErrorsIgnorePattern: '^_',
-          caughtErrors: 'all',
-          caughtErrorsIgnorePattern: '^_',
-          varsIgnorePattern: '^React$', // 只允许 React 变量未使用
         },
       ],
       ...reactHooks.configs.recommended.rules, //检查 React Hooks 的使用是否符合最佳实践
       ...reactRefresh.configs.recommended.rules, //检查 React 组件是否只导出常量
       ...react.configs.recommended.rules, //检查 React 组件是否只导出常量
-      ...importPlugin.configs.recommended.rules, //检查导入的顺序
+      ...importPlugin.configs.recommended.rules, //检查导入的顺���
       ...prettier.configs.recommended.rules, //禁用与 Prettier 冲突的 ESLint 规则
       ...tseslint.configs.recommended.rules, //检查 TypeScript 代码是否符合最佳实践
 
@@ -91,15 +84,6 @@ export default [
       'no-unused-vars': 'off', // 使用 TypeScript 的规则替代
       'prefer-const': 'error',
       'no-var': 'error',
-
-      // React 规则
-      'react/jsx-uses-react': 'error',
-      'react/jsx-uses-vars': 'error',
-      'react/jsx-no-undef': 'error',
-      'react/jsx-key': 'error',
-      'react/prop-types': 'error',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
 
       // 最佳实践
       eqeqeq: ['error', 'always'],
@@ -168,17 +152,7 @@ export default [
         },
       ],
 
-      // 代码风格
-      'prettier/prettier': [
-        'error',
-        {
-          singleQuote: true,
-          trailingComma: 'es5',
-          printWidth: 100,
-          tabWidth: 2,
-          semi: true,
-        },
-      ],
+      'react/react-in-jsx-scope': 'off',
     },
   },
 ];
