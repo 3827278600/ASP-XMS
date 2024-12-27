@@ -1,11 +1,11 @@
 import js from '@eslint/js';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from 'typescript-eslint';
-import react from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import globals from 'globals';
+import tseslint from '@typescript-eslint/eslint-plugin';
 
 export default tseslint.config(
   {
@@ -32,9 +32,9 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      react: react,
+      react,
       import: importPlugin,
-      prettier: prettier,
+      prettier,
       '@typescript-eslint': tseslint.plugin,
     },
     settings: {
@@ -70,6 +70,8 @@ export default tseslint.config(
           caughtErrorsIgnorePattern: '^_',
           caughtErrors: 'all',
           caughtErrorsIgnorePattern: '^_',
+          varsIgnorePattern: '^React$', // 只允许 React 变量未使用
+
         },
       ],
       ...reactHooks.configs.recommended.rules, //检查 React Hooks 的使用是否符合最佳实践
@@ -85,18 +87,6 @@ export default tseslint.config(
       'no-unused-vars': 'off', // 使用 TypeScript 的规则替代
       'prefer-const': 'error',
       'no-var': 'error',
-
-      // TypeScript 相关
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          varsIgnorePattern: '^React$', // 只允许 React 变量未使用
-          argsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
 
       // React 规则
       'react/jsx-uses-react': 'error',

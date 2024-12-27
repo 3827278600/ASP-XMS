@@ -1,7 +1,8 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
 import { registerMicroApps, start } from 'qiankun';
-import App from "./App";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+import App from './App';
 
 registerMicroApps([
   {
@@ -25,7 +26,9 @@ start();
 //   tracesSampleRate: 1.0,
 // });
 
-const root = createRoot(document.getElementById("root") as HTMLElement);
+const root = 
+
+createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <App />
