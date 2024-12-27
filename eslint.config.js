@@ -1,32 +1,31 @@
-import js from '@eslint/js';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 import importPlugin from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
-import tseslint from '@typescript-eslint/eslint-plugin';
 
-export default tseslint.config(
+export default [
   {
     ignores: ['dist', 'node_modules', '*.min.js', '*.d.ts', 'vite.config.ts', 'build', 'coverage'],
   },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
-      ecmaVersion: 2020,
-      sourceType: 'module',
-      parser: tseslint.parser,
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
       globals: {
         ...globals.browser,
         ...globals.es2020,
         ...globals.node,
-      },
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
       },
     },
     plugins: {
@@ -35,11 +34,17 @@ export default tseslint.config(
       react,
       import: importPlugin,
       prettier,
-      '@typescript-eslint': tseslint.plugin,
+      '@typescript-eslint': tseslint,
     },
     settings: {
       react: {
         version: 'detect',
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
       },
     },
     rules: {
@@ -71,7 +76,6 @@ export default tseslint.config(
           caughtErrors: 'all',
           caughtErrorsIgnorePattern: '^_',
           varsIgnorePattern: '^React$', // 只允许 React 变量未使用
-
         },
       ],
       ...reactHooks.configs.recommended.rules, //检查 React Hooks 的使用是否符合最佳实践
@@ -176,5 +180,5 @@ export default tseslint.config(
         },
       ],
     },
-  }
-);
+  },
+];
