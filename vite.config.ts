@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       strictPort: false,
       cors: true,
-      strict: false,
+      strict: true,
       proxy: {
         '/api': {
           target: env.VITE_APP_BASE_API,

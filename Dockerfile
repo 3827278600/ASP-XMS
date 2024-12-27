@@ -26,8 +26,8 @@ FROM nginx:latest
 # 复制构建输出到 Nginx 的 html 目录
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# 根据环境复制不同的 Nginx 配置文件
-COPY nginx/${NODE_ENV}.conf /etc/nginx/nginx.conf
+# # 根据环境复制不同的 Nginx 配置文件
+# COPY nginx/${NODE_ENV}.conf /etc/nginx/nginx.conf
 
 # 暴露端口
 EXPOSE 80
